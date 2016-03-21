@@ -86,27 +86,25 @@ class usCall {
 		$this->min = null;
 		
 		foreach ($paths as $path) {
-			foreach ($path as $value) {
-				$cost = $this->originalCost * (1 + $this->getSumOfTaxRate($path));
-				
-				if (empty($this->min)) {
-				    $this->min = $cost;
-				}
-
-				if ($this->min > $cost) {
-					$this->min = $cost;
-				}
-
-				array_push($solutions, array(
-					"path" => $path,
-					"cost" => $cost
-				));
+			$cost = $this->originalCost * (1 + $this->getSumOfTaxRate($path));
+			
+			if (empty($this->min)) {
+			    $this->min = $cost;
 			}
+
+			if ($this->min > $cost) {
+				$this->min = $cost;
+			}
+
+			array_push($solutions, array(
+				"path" => $path,
+				"cost" => $cost
+			));
 		}
 		
-		$bestSolutions = array_filter($solutions, function($v, $k) {
+		$bestSolutions = array_filter($solutions, function($v) {
 			return $v["cost"] <= $this->min;
-		}, ARRAY_FILTER_USE_BOTH);
+		});
 
 		return $bestSolutions;
 	}

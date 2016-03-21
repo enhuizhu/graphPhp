@@ -13,6 +13,8 @@ print_r("------ solutions -------\n");
 
 $solutions = $usCall->getPaths();
 
+// var_dump($solutions);
+
 foreach ($solutions as $key => $value) {
 	print_r("path:" . json_encode($value["path"]));	
 	print_r("\ncost:" . $value["cost"]);
